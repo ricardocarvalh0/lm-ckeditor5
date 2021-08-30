@@ -177,9 +177,8 @@ ClassicEditor.defaultConfig = {
 		],
 		toolbar: [
 			'imageStyle:alignLeft',
-			'imageStyle:full',
+			'imageStyle:alignCenter',
 			'imageStyle:alignRight',
-			'imageStyle:side',
 		],
 	},
 	table: {
