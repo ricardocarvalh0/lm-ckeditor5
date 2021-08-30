@@ -8,91 +8,179 @@ import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classicedi
 
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
+import AutoSave from '@ckeditor/ckeditor5-autosave/src/autosave';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
+import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
+import FontBackgroundColor from '@ckeditor/ckeditor5-font/src/fontbackgroundcolor';
+import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor';
+import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
+import FontSize from '@ckeditor/ckeditor5-font/src/fontsize';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
+import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
+import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 import Image from '@ckeditor/ckeditor5-image/src/image';
-import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
+import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
+import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
-import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
+import PageBreak from '@ckeditor/ckeditor5-page-break/src/pagebreak';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
+import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
+import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
+import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
+import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
-import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
+import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
+
+import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
 export default class ClassicEditor extends ClassicEditorBase {}
+
+class EmTagItalicPlugin extends Plugin {
+	init() {
+		this.editor.conversion.for('downcast').attributeToElement({
+			model: 'italic',
+			view: 'i',
+			converterPriority: 'normal',
+		});
+		this.editor.conversion.for('editingDowncast').attributeToElement({
+			model: 'italic',
+			view: 'em',
+			converterPriority: 'high',
+			upcastAlso: ['i', { styles: { 'font-style': 'italic' } }],
+		});
+	}
+}
+
+class StrongTagBoldPlugin extends Plugin {
+	init() {
+		this.editor.conversion.for('downcast').attributeToElement({
+			model: 'bold',
+			view: 'b',
+			converterPriority: 'normal',
+		});
+		this.editor.conversion.for('editingDowncast').attributeToElement({
+			model: 'bold',
+			view: 'strong',
+			converterPriority: 'high',
+			upcastAlso: ['b', { styles: { 'font-weight': 'bold' } }],
+		});
+	}
+}
 
 // Plugins to include in the build.
 ClassicEditor.builtinPlugins = [
 	Essentials,
 	UploadAdapter,
+	Alignment,
 	Autoformat,
-	Bold,
-	Italic,
+	AutoSave,
 	BlockQuote,
-	CKFinder,
+	Bold,
 	CloudServices,
+	CKFinder,
 	EasyImage,
+	FontBackgroundColor,
+	FontColor,
+	FontFamily,
+	FontSize,
 	Heading,
+	Highlight,
+	HorizontalLine,
 	Image,
-	ImageCaption,
+	ImageResize,
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
 	Indent,
+	IndentBlock,
+	Italic,
 	Link,
 	List,
-	MediaEmbed,
+	PageBreak,
 	Paragraph,
 	PasteFromOffice,
+	RemoveFormat,
+	Subscript,
+	Superscript,
+	Strikethrough,
 	Table,
 	TableToolbar,
-	TextTransformation
+	Underline,
+
+	EmTagItalicPlugin,
+	StrongTagBoldPlugin,
 ];
 
 // Editor configuration.
 ClassicEditor.defaultConfig = {
+	allowedContent: true,
+	roundedCorners: true,
 	toolbar: {
+		shouldNotGroupWhenFull: true,
 		items: [
 			'heading',
 			'|',
 			'bold',
 			'italic',
-			'link',
+			'underline',
+			'strikethrough',
+			'subscript',
+			'superscript',
+			'|',
+			'alignment',
+			'|',
 			'bulletedList',
 			'numberedList',
 			'|',
-			'outdent',
 			'indent',
+			'outdent',
 			'|',
-			'uploadImage',
+			'highlight',
+			'fontBackgroundColor',
+			'fontColor',
+			'fontSize',
+			'fontFamily',
+			'|',
+			'link',
 			'blockQuote',
+			'uploadImage',
 			'insertTable',
-			'mediaEmbed',
+			'horizontalLine',
+			'pageBreak',
+			'|',
 			'undo',
-			'redo'
+			'redo',
+			'removeFormat'
 		]
 	},
+	alignment: {
+		options: ['left', 'right', 'center', 'justify']
+	},
 	image: {
+		styles: [
+			'full',
+			'alignLeft',
+			'alignRight'
+		],
 		toolbar: [
-			'imageStyle:inline',
-			'imageStyle:block',
+			'imageStyle:alignLeft',
+			'imageStyle:full',
+			'imageStyle:alignRight',
 			'imageStyle:side',
-			'|',
-			'toggleImageCaption',
-			'imageTextAlternative'
-		]
+		],
 	},
 	table: {
 		contentToolbar: [
