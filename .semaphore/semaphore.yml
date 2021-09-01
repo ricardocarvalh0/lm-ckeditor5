@@ -1,0 +1,24 @@
+version: v1.0
+name: CKEditor build
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+auto_cancel:
+  queued:
+    when: "branch = 'master'"
+blocks:
+  - name: Build & Publish
+    dependencies: []
+    task:
+	  secrets:
+		- name: npm-env-vars
+      jobs:
+        - name: Build & Publish
+          commands:
+            - checkout
+            - sem-version node 14.3.0
+            - cd packages/ckeditor5-build-classic
+			- npm ci
+			- npm run build
+			- npm publish --access public
