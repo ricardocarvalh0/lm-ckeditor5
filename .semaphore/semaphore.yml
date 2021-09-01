@@ -21,4 +21,5 @@ blocks:
             - cd packages/ckeditor5-build-classic
             - npm ci
             - npm run build
+            - npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
             - npm publish --access public
