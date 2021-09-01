@@ -11,14 +11,14 @@ blocks:
   - name: Build & Publish
     dependencies: []
     task:
-	  secrets:
-		- name: npm-env-vars
+      secrets:
+        - name: npm-env-vars
       jobs:
         - name: Build & Publish
           commands:
             - checkout
             - sem-version node 14.3.0
             - cd packages/ckeditor5-build-classic
-			- npm ci
-			- npm run build
-			- npm publish --access public
+            - npm ci
+            - npm run build
+            - npm publish --access public
