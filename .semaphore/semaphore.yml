@@ -18,7 +18,6 @@ blocks:
           commands:
             - checkout
             - sem-version node 14.3.0
-            - cd packages/ckeditor5-build-classic
             - npm ci
             - npm run build
             - npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
