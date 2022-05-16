@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2021, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2022, CKSource Holding sp. z o.o. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -10,9 +10,7 @@ import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
-import AutoSave from '@ckeditor/ckeditor5-autosave/src/autosave';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
@@ -22,7 +20,6 @@ import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor';
 import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
 import FontSize from '@ckeditor/ckeditor5-font/src/fontsize';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 import Image from '@ckeditor/ckeditor5-image/src/image';
 import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
@@ -33,7 +30,6 @@ import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
-import PageBreak from '@ckeditor/ckeditor5-page-break/src/pagebreak';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
@@ -43,6 +39,8 @@ import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
+import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
+import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
 
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
@@ -86,19 +84,18 @@ ClassicEditor.builtinPlugins = [
 	UploadAdapter,
 	Alignment,
 	Autoformat,
-	AutoSave,
-	BlockQuote,
 	Bold,
-	CloudServices,
+	Italic,
+	BlockQuote,
 	CKFinder,
+  CloudServices,
 	EasyImage,
 	FontBackgroundColor,
 	FontColor,
 	FontFamily,
 	FontSize,
 	Heading,
-	Highlight,
-	HorizontalLine,
+  HorizontalLine,
 	Image,
 	ImageResize,
 	ImageStyle,
@@ -106,10 +103,8 @@ ClassicEditor.builtinPlugins = [
 	ImageUpload,
 	Indent,
 	IndentBlock,
-	Italic,
 	Link,
 	List,
-	PageBreak,
 	Paragraph,
 	PasteFromOffice,
 	RemoveFormat,
@@ -122,6 +117,7 @@ ClassicEditor.builtinPlugins = [
 
 	EmTagItalicPlugin,
 	StrongTagBoldPlugin,
+	TextTransformation
 ];
 
 // Editor configuration.
@@ -137,8 +133,6 @@ ClassicEditor.defaultConfig = {
 			'italic',
 			'underline',
 			'strikethrough',
-			'subscript',
-			'superscript',
 			'|',
 			'alignment',
 			'|',
@@ -148,18 +142,15 @@ ClassicEditor.defaultConfig = {
 			'indent',
 			'outdent',
 			'|',
-			'highlight',
 			'fontBackgroundColor',
 			'fontColor',
 			'fontSize',
 			'fontFamily',
 			'|',
 			'link',
-			'blockQuote',
 			'uploadImage',
+			'blockQuote',
 			'insertTable',
-			'horizontalLine',
-			'pageBreak',
 			'|',
 			'undo',
 			'redo',
@@ -170,16 +161,11 @@ ClassicEditor.defaultConfig = {
 		options: ['left', 'right', 'center', 'justify']
 	},
 	image: {
-		styles: [
-			'full',
-			'alignLeft',
-			'alignRight'
-		],
 		toolbar: [
-			'imageStyle:alignLeft',
-			'imageStyle:alignCenter',
-			'imageStyle:alignRight',
-		],
+			'imageStyle:inline',
+			'imageStyle:block',
+			'imageStyle:side',
+		]
 	},
 	table: {
 		contentToolbar: [
