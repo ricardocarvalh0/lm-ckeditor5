@@ -43,6 +43,8 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
+import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed';
+import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
@@ -103,6 +105,8 @@ ClassicEditor.builtinPlugins = [
 	TableToolbar,
 	Underline,
   ImageLink,
+  HtmlEmbed,
+  MediaEmbed,
 
 	EmTagItalicPlugin,
 	TextTransformation
@@ -167,4 +171,9 @@ ClassicEditor.defaultConfig = {
       'linkImage',
     ]
   },
+  htmlEmbed: {
+    showPreviews: true,
+  },
+  // This value must be kept in sync with the language defined in webpack.config.js.
+  language: 'en'
 };
