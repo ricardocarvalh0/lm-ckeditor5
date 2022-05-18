@@ -146,13 +146,6 @@ ClassicEditor.defaultConfig = {
 	alignment: {
 		options: ['left', 'right', 'center', 'justify']
 	},
-	image: {
-		toolbar: [
-			'imageStyle:inline',
-			'imageStyle:block',
-			'imageStyle:side',
-		]
-	},
 	table: {
 		contentToolbar: [
 			'tableColumn',
@@ -162,4 +155,13 @@ ClassicEditor.defaultConfig = {
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
+  image: {
+    toolbar: [
+      // A dropdown containing `alignLeft` and `alignRight` options.
+      'imageStyle:alignLeft',
+      // A dropdown containing `alignBlockLeft`, `block` (default) and  `alignBlockRight` options.
+      'imageStyle:breakText',
+      'imageStyle:alignRight',
+    ]
+  },
 };
