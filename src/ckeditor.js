@@ -51,116 +51,108 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 export default class ClassicEditor extends ClassicEditorBase {}
 
 class EmTagItalicPlugin extends Plugin {
-	init() {
-		this.editor.conversion.for('downcast').attributeToElement({
-			model: 'italic',
-			view: 'i',
-			converterPriority: 'normal',
-		});
-		this.editor.conversion.for('editingDowncast').attributeToElement({
-			model: 'italic',
-			view: 'em',
-			converterPriority: 'high',
-			upcastAlso: ['i', { styles: { 'font-style': 'italic' } }],
-		});
-	}
-}
+  init() {
+    this.editor.conversion.for('downcast').attributeToElement({
+      model: 'italic',
+      view: 'em',
+      converterPriority: 'high',
+    });
+    this.editor.conversion.for('editingDowncast').attributeToElement({
+      model: 'italic',
+      view: 'em',
+      converterPriority: 'high',
+      upcastAlso: ['i', { styles: { 'font-style': 'italic' } }],
+    });
+  }
 }
 
 // Plugins to include in the build.
 ClassicEditor.builtinPlugins = [
-	Essentials,
-	UploadAdapter,
-	Alignment,
-	Autoformat,
-	Bold,
-	Italic,
-	BlockQuote,
-	CKFinder,
+  Essentials,
+  UploadAdapter,
+  Alignment,
+  Autoformat,
+  Bold,
+  Italic,
+  BlockQuote,
+  CKFinder,
   CloudServices,
-	EasyImage,
-	FontBackgroundColor,
-	FontColor,
-	FontFamily,
-	FontSize,
-	Heading,
+  EasyImage,
+  FontBackgroundColor,
+  FontColor,
+  FontFamily,
+  FontSize,
+  Heading,
   Highlight,
   HorizontalLine,
-	Image,
-	ImageResize,
-	ImageStyle,
-	ImageToolbar,
-	ImageUpload,
-	Indent,
-	IndentBlock,
-	Link,
-	List,
-	Paragraph,
-	PasteFromOffice,
-	RemoveFormat,
-	Subscript,
-	Superscript,
-	Strikethrough,
-	Table,
-	TableToolbar,
-	Underline,
+  Image,
   ImageLink,
+  ImageResize,
+  ImageStyle,
+  ImageToolbar,
+  ImageUpload,
+  Indent,
+  IndentBlock,
+  Link,
+  List,
+  Paragraph,
+  PasteFromOffice,
+  RemoveFormat,
+  Subscript,
+  Superscript,
+  Strikethrough,
+  Table,
+  TableToolbar,
+  Underline,
   HtmlEmbed,
   MediaEmbed,
 
-	EmTagItalicPlugin,
-	TextTransformation
+  EmTagItalicPlugin,
+  TextTransformation
 ];
 
 // Editor configuration.
 ClassicEditor.defaultConfig = {
-	allowedContent: true,
-	roundedCorners: true,
-	toolbar: {
-		shouldNotGroupWhenFull: true,
-		items: [
-			'heading',
-			'|',
-			'bold',
-			'italic',
-			'underline',
-			'strikethrough',
-			'|',
-			'alignment',
-			'|',
-			'bulletedList',
-			'numberedList',
-			'|',
-			'indent',
-			'outdent',
-			'|',
-			'fontBackgroundColor',
-			'fontColor',
-			'fontSize',
-			'fontFamily',
-			'|',
-			'link',
-			'uploadImage',
-			'blockQuote',
-			'insertTable',
-			'|',
-			'undo',
-			'redo',
-			'removeFormat'
-		]
-	},
-	alignment: {
-		options: ['left', 'right', 'center', 'justify']
-	},
-	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
-		]
-	},
-	// This value must be kept in sync with the language defined in webpack.config.js.
-	language: 'en'
+  allowedContent: true,
+  roundedCorners: true,
+  toolbar: {
+    shouldNotGroupWhenFull: true,
+    items: [
+      'heading',
+      '|',
+      'bold',
+      'italic',
+      'underline',
+      'strikethrough',
+      '|',
+      'alignment',
+      '|',
+      'bulletedList',
+      'numberedList',
+      '|',
+      'indent',
+      'outdent',
+      '|',
+      'highlight',
+      'fontBackgroundColor',
+      'fontColor',
+      'fontSize',
+      'fontFamily',
+      '|',
+      'link',
+      'uploadImage',
+      'blockQuote',
+      'insertTable',
+      'htmlEmbed',
+      '|',
+      'undo',
+      'redo',
+      'removeFormat'
+    ]
+  },
+  alignment: {
+    options: ['left', 'right', 'center', 'justify']
+  },
   image: {
     toolbar: [
       // A dropdown containing `alignLeft` and `alignRight` options.
@@ -173,6 +165,13 @@ ClassicEditor.defaultConfig = {
   },
   htmlEmbed: {
     showPreviews: true,
+  },
+  table: {
+    contentToolbar: [
+      'tableColumn',
+      'tableRow',
+      'mergeTableCells'
+    ]
   },
   // This value must be kept in sync with the language defined in webpack.config.js.
   language: 'en'
