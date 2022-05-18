@@ -23,6 +23,7 @@ import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 import Image from '@ckeditor/ckeditor5-image/src/image';
+import ImageLink from '@ckeditor/ckeditor5-link/src/linkimage';
 import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
@@ -101,6 +102,7 @@ ClassicEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	Underline,
+  ImageLink,
 
 	EmTagItalicPlugin,
 	TextTransformation
@@ -162,6 +164,7 @@ ClassicEditor.defaultConfig = {
       // A dropdown containing `alignBlockLeft`, `block` (default) and  `alignBlockRight` options.
       'imageStyle:breakText',
       'imageStyle:alignRight',
+      'linkImage',
     ]
   },
 };
