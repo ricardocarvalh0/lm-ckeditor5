@@ -61,21 +61,6 @@ class EmTagItalicPlugin extends Plugin {
 		});
 	}
 }
-
-class StrongTagBoldPlugin extends Plugin {
-	init() {
-		this.editor.conversion.for('downcast').attributeToElement({
-			model: 'bold',
-			view: 'b',
-			converterPriority: 'normal',
-		});
-		this.editor.conversion.for('editingDowncast').attributeToElement({
-			model: 'bold',
-			view: 'strong',
-			converterPriority: 'high',
-			upcastAlso: ['b', { styles: { 'font-weight': 'bold' } }],
-		});
-	}
 }
 
 // Plugins to include in the build.
@@ -116,7 +101,6 @@ ClassicEditor.builtinPlugins = [
 	Underline,
 
 	EmTagItalicPlugin,
-	StrongTagBoldPlugin,
 	TextTransformation
 ];
 
