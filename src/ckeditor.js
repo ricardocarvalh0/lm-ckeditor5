@@ -5,6 +5,7 @@
 
 // The editor creator to use.
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document/';
 
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
@@ -46,9 +47,11 @@ import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices'
 import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 
+
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
-export default class ClassicEditor extends ClassicEditorBase {}
+class ClassicEditor extends ClassicEditorBase {}
+class DocumentEditor extends DecoupledEditor {}
 
 class EmTagItalicPlugin extends Plugin {
   init() {
@@ -67,7 +70,7 @@ class EmTagItalicPlugin extends Plugin {
 }
 
 // Plugins to include in the build.
-ClassicEditor.builtinPlugins = [
+const commonPlugins = [
   Essentials,
   UploadAdapter,
   Alignment,
@@ -112,7 +115,7 @@ ClassicEditor.builtinPlugins = [
 ];
 
 // Editor configuration.
-ClassicEditor.defaultConfig = {
+const defaultConfig = {
   allowedContent: true,
   roundedCorners: true,
   toolbar: {
@@ -176,3 +179,14 @@ ClassicEditor.defaultConfig = {
   // This value must be kept in sync with the language defined in webpack.config.js.
   language: 'en'
 };
+
+ClassicEditor.builtinPlugins = commonPlugins;
+ClassicEditor.defaultConfig = defaultConfig;
+
+DocumentEditor.builtinPlugins = commonPlugins;
+DocumentEditor.defaultConfig = defaultConfig;
+
+export default {
+	ClassicEditor,
+	DocumentEditor,
+}
