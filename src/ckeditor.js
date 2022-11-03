@@ -5,7 +5,7 @@
 
 // The editor creator to use.
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document/';
+import DecoupledEditorBase from '@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor';
 
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
@@ -51,7 +51,7 @@ import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 
 class ClassicEditor extends ClassicEditorBase {}
-class DocumentEditor extends DecoupledEditor {}
+class DocumentEditor extends DecoupledEditorBase {}
 
 class EmTagItalicPlugin extends Plugin {
   init() {
@@ -183,8 +183,8 @@ const defaultConfig = {
 ClassicEditor.builtinPlugins = commonPlugins;
 ClassicEditor.defaultConfig = defaultConfig;
 
-DocumentEditor.builtinPlugins = commonPlugins;
-DocumentEditor.defaultConfig = defaultConfig;
+DocumentEditor.builtinPlugins = [...commonPlugins];
+DocumentEditor.defaultConfig = {...defaultConfig};
 
 export default {
 	ClassicEditor,
