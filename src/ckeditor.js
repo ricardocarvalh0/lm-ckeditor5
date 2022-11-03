@@ -183,8 +183,8 @@ const defaultConfig = {
 ClassicEditor.builtinPlugins = commonPlugins;
 ClassicEditor.defaultConfig = defaultConfig;
 
-DocumentEditor.builtinPlugins = [...commonPlugins];
-DocumentEditor.defaultConfig = {...defaultConfig};
+DocumentEditor.builtinPlugins = commonPlugins;
+DocumentEditor.defaultConfig = defaultConfig;
 
 export default {
 	ClassicEditor,
