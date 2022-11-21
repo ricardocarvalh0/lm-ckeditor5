@@ -75,7 +75,6 @@ class MergeFieldPlugin extends Plugin {
 		return [Widget];
 	}
 	init() {
-		console.log('init MergeFieldPlugin');
 		this._defineSchema();
 		this._defineConverters();
 		this.editor.commands.add('mergeField', new MergeFieldCommand(this.editor));
