@@ -51,6 +51,7 @@ import Widget from "@ckeditor/ckeditor5-widget/src/widget";
 import MergeFieldCommand from "./commands/mergeFieldCommand";
 import { toWidget, viewToModelPositionOutsideModelElement } from '@ckeditor/ckeditor5-widget/src/utils';
 import Mention from '@ckeditor/ckeditor5-mention/src/mention';
+import ImportWord from '@ckeditor/ckeditor5-import-word/src/importword';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -72,69 +73,69 @@ class EmTagItalicPlugin extends Plugin {
 
 
 class MergeFieldPlugin extends Plugin {
-	static get requires() {
-		return [Widget];
-	}
-	init() {
-		this._defineSchema();
-		this._defineConverters();
-		this.editor.commands.add('mergeField', new MergeFieldCommand(this.editor));
-		this.editor.editing.mapper.on(
-			'viewToModelPosition',
-			viewToModelPositionOutsideModelElement( this.editor.model, viewElement => viewElement.hasClass( 'mergeField' ) )
-		);
-	}
+  static get requires() {
+    return [Widget];
+  }
+  init() {
+    this._defineSchema();
+    this._defineConverters();
+    this.editor.commands.add('mergeField', new MergeFieldCommand(this.editor));
+    this.editor.editing.mapper.on(
+      'viewToModelPosition',
+      viewToModelPositionOutsideModelElement(this.editor.model, viewElement => viewElement.hasClass('mergeField'))
+    );
+  }
 
-	_defineSchema() {
-		const schema = this.editor.model.schema;
+  _defineSchema() {
+    const schema = this.editor.model.schema;
 
-		schema.register( 'mergeField', {
-			allowWhere: '$text',
-			isInline: true,
-			isObject: true,
-			allowAttributesOf: '$text',
-			allowAttributes: [ 'name' ]
-		} );
-	}
+    schema.register('mergeField', {
+      allowWhere: '$text',
+      isInline: true,
+      isObject: true,
+      allowAttributesOf: '$text',
+      allowAttributes: ['name']
+    });
+  }
 
-	_defineConverters() {
-		const conversion = this.editor.conversion;
+  _defineConverters() {
+    const conversion = this.editor.conversion;
 
-		conversion.for( 'upcast' ).elementToElement( {
-			view: { name: 'span', classes: [ 'mergeField' ] },
-			model: ( viewElement, { writer: modelWriter } ) => {
-				const name = viewElement.getChild(0)?.data;
-				if (name) return modelWriter.createElement( 'mergeField', { name } );
-			}
-		} );
+    conversion.for('upcast').elementToElement({
+      view: { name: 'span', classes: ['mergeField'] },
+      model: (viewElement, { writer: modelWriter }) => {
+        const name = viewElement.getChild(0)?.data;
+        if (name) return modelWriter.createElement('mergeField', { name });
+      }
+    });
 
-		conversion.for( 'editingDowncast' ).elementToElement( {
-			model: 'mergeField',
-			view: ( modelItem, { writer: viewWriter } ) => {
-				const widgetElement = createMergeFieldView( modelItem, viewWriter );
-				return toWidget( widgetElement, viewWriter );
-			}
-		} );
+    conversion.for('editingDowncast').elementToElement({
+      model: 'mergeField',
+      view: (modelItem, { writer: viewWriter }) => {
+        const widgetElement = createMergeFieldView(modelItem, viewWriter);
+        return toWidget(widgetElement, viewWriter);
+      }
+    });
 
-		conversion.for( 'dataDowncast' ).elementToElement( {
-			model: 'mergeField',
-			view: ( modelItem, { writer: viewWriter } ) => createMergeFieldView( modelItem, viewWriter )
-		} );
+    conversion.for('dataDowncast').elementToElement({
+      model: 'mergeField',
+      view: (modelItem, { writer: viewWriter }) => createMergeFieldView(modelItem, viewWriter)
+    });
 
-		// Helper method for both downcast converters.
-		function createMergeFieldView( modelItem, viewWriter ) {
-			const name = modelItem.getAttribute( 'name' );
+    // Helper method for both downcast converters.
+    function createMergeFieldView(modelItem, viewWriter) {
+      const name = modelItem.getAttribute('name');
 
-			const mergeFieldView = viewWriter.createContainerElement( 'span', {
-				class: 'mergeField'
-			} );
+      const mergeFieldView = viewWriter.createContainerElement('span', {
+        class: 'mergeField'
+      });
 
-			const innerText = viewWriter.createText(name);
-			viewWriter.insert( viewWriter.createPositionAt( mergeFieldView, 0 ), innerText );
+      const innerText = viewWriter.createText(name);
+      viewWriter.insert(viewWriter.createPositionAt(mergeFieldView, 0), innerText);
 
-			return mergeFieldView;
-		}
-	}
+      return mergeFieldView;
+    }
+  }
 }
 
 // Plugins to include in the build.
@@ -178,6 +179,7 @@ ClassicEditor.builtinPlugins = [
   HtmlEmbed,
   MediaEmbed,
   Mention,
+  ImportWord,
 
   EmTagItalicPlugin,
   TextTransformation,
