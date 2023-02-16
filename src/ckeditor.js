@@ -41,6 +41,10 @@ import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
 import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
+import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
+import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize';
+import TableCaption from '@ckeditor/ckeditor5-table/src/tablecaption';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
@@ -177,6 +181,10 @@ ClassicEditor.builtinPlugins = [
   Strikethrough,
   Table,
   TableToolbar,
+  TableProperties,
+  TableCellProperties,
+  TableColumnResize,
+  TableCaption,
   Underline,
   HtmlEmbed,
   MediaEmbed,
@@ -247,7 +255,9 @@ ClassicEditor.defaultConfig = {
     contentToolbar: [
       'tableColumn',
       'tableRow',
-      'mergeTableCells'
+      'mergeTableCells',
+      'tableProperties',
+      'tableCellProperties',
     ]
   },
   importWord: {
