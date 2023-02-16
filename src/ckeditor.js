@@ -32,6 +32,7 @@ import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
+import ListProperties from '@ckeditor/ckeditor5-list/src/listproperties';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
@@ -40,6 +41,10 @@ import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
 import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
+import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
+import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize';
+import TableCaption from '@ckeditor/ckeditor5-table/src/tablecaption';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
@@ -167,6 +172,7 @@ ClassicEditor.builtinPlugins = [
   IndentBlock,
   Link,
   List,
+  ListProperties,
   Paragraph,
   PasteFromOffice,
   RemoveFormat,
@@ -175,6 +181,10 @@ ClassicEditor.builtinPlugins = [
   Strikethrough,
   Table,
   TableToolbar,
+  TableProperties,
+  TableCellProperties,
+  TableColumnResize,
+  TableCaption,
   Underline,
   HtmlEmbed,
   MediaEmbed,
@@ -245,8 +255,20 @@ ClassicEditor.defaultConfig = {
     contentToolbar: [
       'tableColumn',
       'tableRow',
-      'mergeTableCells'
+      'mergeTableCells',
+      'tableProperties',
+      'tableCellProperties',
     ]
+  },
+  importWord: {
+    defaultStyles: true,
+  },
+  list: {
+    properties: {
+      styles: true,
+      startIndex: true,
+      reversed: true
+    }
   },
   // This value must be kept in sync with the language defined in webpack.config.js.
   language: 'en'
