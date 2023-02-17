@@ -31,8 +31,8 @@ import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Link from '@ckeditor/ckeditor5-link/src/link';
-import List from '@ckeditor/ckeditor5-list/src/list';
-import ListProperties from '@ckeditor/ckeditor5-list/src/listproperties';
+import DocumentList from '@ckeditor/ckeditor5-list/src/documentlist';
+import DocumentListProperties from '@ckeditor/ckeditor5-list/src/listproperties';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
@@ -171,8 +171,8 @@ ClassicEditor.builtinPlugins = [
   Indent,
   IndentBlock,
   Link,
-  List,
-  ListProperties,
+  DocumentList,
+  DocumentListProperties,
   Paragraph,
   PasteFromOffice,
   RemoveFormat,
