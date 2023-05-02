@@ -62,6 +62,10 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import Widget from "@ckeditor/ckeditor5-widget/src/widget";
 import MergeFieldCommand from "./commands/mergeFieldCommand";
 import Mention from '@ckeditor/ckeditor5-mention/src/mention';
+import * as DOMPurify from 'dompurify';
+import * as sanitizeHtml from 'sanitize-html';
+
+
 
 import { toWidget, viewToModelPositionOutsideModelElement } from '@ckeditor/ckeditor5-widget/src/utils';
 
@@ -266,6 +270,18 @@ ClassicEditor.defaultConfig = {
   },
   htmlEmbed: {
     showPreviews: true,
+	sanitizeHtml: ( inputHtml ) => {
+		// Strip unsafe elements and attributes, e.g.:
+		// the `<script>` elements and `on*` attributes.
+		// const outputHtml = sanitize( inputHtml );
+		const purifiedHtml = DOMPurify.sanitize(inputHtml, { USE_PROFILES: { html: true } });
+		const cleanHtml = sanitizeHtml(purifiedHtml);
+		return {
+			html: cleanHtml,
+			// true or false depending on whether the sanitizer stripped anything.
+			hasChanged: true
+		};
+	}
   },
   table: {
     contentToolbar: [

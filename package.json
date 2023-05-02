@@ -38,13 +38,17 @@
     "@ckeditor/ckeditor5-special-characters": "^36.0.1",
     "@ckeditor/ckeditor5-table": "^36.0.1",
     "@ckeditor/ckeditor5-typing": "^36.0.1",
-    "@ckeditor/ckeditor5-widget": "^36.0.1"
+    "@ckeditor/ckeditor5-widget": "^36.0.1",
+    "dompurify": "^3.0.2",
+    "sanitize-html": "^2.10.0"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-core": "^36.0.1",
     "@ckeditor/ckeditor5-dev-utils": "^33.0.0",
     "@ckeditor/ckeditor5-dev-webpack-plugin": "^30.0.0",
     "@ckeditor/ckeditor5-theme-lark": "^36.0.1",
+    "@types/dompurify": "^3.0.2",
+    "@types/sanitize-html": "^2.9.0",
     "css-loader": "^6.7.3",
     "postcss-loader": "^7.0.2",
     "raw-loader": "^4.0.2",
