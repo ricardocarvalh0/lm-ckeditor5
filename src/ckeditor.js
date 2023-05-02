@@ -261,7 +261,8 @@ ClassicEditor.defaultConfig = {
       'imageStyle:breakText',
       'imageStyle:alignRight',
       'linkImage',
-    ]
+    ],
+    resizeUnit: 'px'
   },
   htmlEmbed: {
     showPreviews: true,
