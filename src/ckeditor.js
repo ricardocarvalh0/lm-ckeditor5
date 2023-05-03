@@ -64,6 +64,7 @@ import MergeFieldCommand from "./commands/mergeFieldCommand";
 import Mention from '@ckeditor/ckeditor5-mention/src/mention';
 
 import { toWidget, viewToModelPositionOutsideModelElement } from '@ckeditor/ckeditor5-widget/src/utils';
+import LMAssist from './plugins/lm_assist/plugin';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -208,6 +209,7 @@ ClassicEditor.builtinPlugins = [
   EmTagItalicPlugin,
   TextTransformation,
   MergeFieldPlugin,
+  LMAssist,
 ];
 
 // Editor configuration.
