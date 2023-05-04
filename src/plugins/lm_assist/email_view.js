@@ -4,13 +4,14 @@ import {
   createLabeledInputText,
   ButtonView,
   submitHandler,
+  clickOutsideHandler,
 } from '@ckeditor/ckeditor5-ui';
 import './email_view_styles.css';
 
 import { icons } from '@ckeditor/ckeditor5-core';
 
 export default class EmailView extends View {
-  constructor(locale, onHide = () => {}, callback = Promise.resolve) {
+  constructor(locale, onHide = () => {}, callback = Promise.resolve, balloon) {
     super(locale);
 
     this.targetInput = this._createInput('Who is this email for?');
@@ -21,7 +22,8 @@ export default class EmailView extends View {
     this.generateButton = this._createButton(
       'Generate',
       icons.check,
-      'ck-button-save'
+      'ck-button-save',
+      false
     );
     this.generateButton.type = 'submit';
 
@@ -56,6 +58,30 @@ export default class EmailView extends View {
         onHide();
       });
     });
+
+    this.on('textChange', () => {
+      const isSubmitEnabled =
+        this.targetInput.fieldView.element.value &&
+        this.topicInput.fieldView.element.value;
+
+      this.generateButton.set({
+        isEnabled: isSubmitEnabled,
+      });
+    });
+
+    clickOutsideHandler({
+      emitter: this,
+      activator: () => balloon.visibleView === this,
+      contextElements: [balloon.view.element],
+      callback: () => {
+        if (
+          !this.targetInput.fieldView.element.value &&
+          !this.topicInput.fieldView.element.value
+        ) {
+          onHide();
+        }
+      },
+    });
   }
 
   render() {
@@ -70,7 +96,7 @@ export default class EmailView extends View {
     this.childViews.first.focus();
   }
 
-  _createInput(label) {
+  _createInput = (label) => {
     const labeledInput = new LabeledFieldView(
       this.locale,
       createLabeledInputText
@@ -78,10 +104,14 @@ export default class EmailView extends View {
 
     labeledInput.label = label;
 
+    labeledInput.on('change:isEmpty', () => {
+      this.fire('textChange');
+    });
+
     return labeledInput;
   }
 
-  _createButton(label, icon, className) {
+  _createButton(label, icon, className, isEnabled = true) {
     const button = new ButtonView();
 
     button.set({
@@ -89,6 +119,7 @@ export default class EmailView extends View {
       icon,
       tooltip: true,
       class: className,
+      isEnabled,
     });
 
     return button;

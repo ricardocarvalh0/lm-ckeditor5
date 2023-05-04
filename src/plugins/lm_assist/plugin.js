@@ -39,10 +39,6 @@ export default class LMAssist extends Plugin {
         this._showForm(event.source.id);
       });
 
-      this.dropdown.set({
-        id: 'lm_assist',
-      });
-
       this.dropdown.buttonView.set({
         label: 'AI',
         withText: true,
@@ -56,22 +52,21 @@ export default class LMAssist extends Plugin {
 
   _createEmailView() {
     const editor = this.editor;
-    const emailView = new EmailView(editor.locale, this._hideForm, this.config.newEmailCallback);
+    const emailView = new EmailView(
+      editor.locale,
+      this._hideForm,
+      this.config.newEmailCallback,
+      this._balloon,
+    );
 
     return emailView;
   }
 
   _getBalloonPositionData() {
-    const view = this.editor.editing.view;
-    const viewDocument = view.document;
-    let target = null;
-
-    // Set a target position by converting view selection range to DOM.
-    target = () =>
-      view.domConverter.viewRangeToDom(viewDocument.selection.getFirstRange());
+    const view = this.dropdown.buttonView;
 
     return {
-      target,
+      target: view.element,
     };
   }
 
