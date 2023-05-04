@@ -13,32 +13,20 @@ import { icons } from '@ckeditor/ckeditor5-core';
 export default class EmailView extends View {
   constructor(locale, onHide = () => {}, callback = Promise.resolve, balloon) {
     super(locale);
+    this.callback = callback;
+    this.onHide = onHide;
 
     this.targetInput = this._createInput('Who is this email for?');
     this.topicInput = this._createInput(
       'What would you like this email to cover?'
     );
 
-    this.generateButton = this._createButton(
-      'Generate',
-      icons.check,
-      'ck-button-save',
-      false
-    );
-    this.generateButton.type = 'submit';
-
-    this.cancelButton = this._createButton(
-      'Cancel',
-      icons.cancel,
-      'ck-button-cancel'
-    );
-    this.cancelButton.delegate('execute').to(this, 'cancel');
+    this.buttonContainerView = this._createButtonContainer(locale);
 
     this.childViews = this.createCollection([
       this.targetInput,
       this.topicInput,
-      this.cancelButton,
-      this.generateButton,
+      this.buttonContainerView,
     ]);
 
     this.setTemplate({
@@ -51,12 +39,7 @@ export default class EmailView extends View {
     });
 
     this.on('submit', () => {
-      callback(
-        this.targetInput.fieldView.element.value,
-        this.topicInput.fieldView.element.value
-      ).then(() => {
-        onHide();
-      });
+      this._handleSubmit();
     });
 
     this.on('textChange', () => {
@@ -103,13 +86,16 @@ export default class EmailView extends View {
     );
 
     labeledInput.label = label;
+    labeledInput.set({
+      class: 'ck-email-assist-input',
+    });
 
     labeledInput.on('change:isEmpty', () => {
       this.fire('textChange');
     });
 
     return labeledInput;
-  }
+  };
 
   _createButton(label, icon, className, isEnabled = true) {
     const button = new ButtonView();
@@ -123,5 +109,56 @@ export default class EmailView extends View {
     });
 
     return button;
+  }
+
+  _createButtonContainer(locale) {
+    this.generateButton = this._createButton(
+      'Generate',
+      icons.check,
+      'ck-button-save',
+      false
+    );
+    this.generateButton.type = 'submit';
+
+    this.cancelButton = this._createButton(
+      'Cancel',
+      icons.cancel,
+      'ck-button-cancel'
+    );
+    this.cancelButton.delegate('execute').to(this, 'cancel');
+
+    const view = new View(locale);
+
+    const buttonCollection = view.createCollection([
+      this.cancelButton,
+      this.generateButton,
+    ]);
+
+    view.setTemplate({
+      tag: 'div',
+      attributes: {
+        class: 'ck-email-assist-button-container',
+      },
+      children: buttonCollection,
+    });
+
+    return view;
+  }
+
+  _handleSubmit() {
+    this.generateButton.set({
+      isEnabled: false,
+    });
+
+    this.callback(
+      this.targetInput.fieldView.element.value,
+      this.topicInput.fieldView.element.value
+    ).then(() => {
+      this.onHide();
+    }).finally(() => {
+      this.generateButton.set({
+        isEnabled: true,
+      });
+    });
   }
 }
