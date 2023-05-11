@@ -67,8 +67,8 @@
   "bugs": "https://github.com/ckeditor/ckeditor5/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ckeditor/ckeditor5.git",
-    "directory": "packages/ckeditor5-build-classic"
+    "url": "https://github.com/boost-legal/lm-ckeditor5",
+    "directory": "packages/lm-ckeditor5"
   },
   "scripts": {
     "build": "webpack --mode production",
