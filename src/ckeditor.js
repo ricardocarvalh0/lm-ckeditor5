@@ -120,8 +120,12 @@ class MergeFieldPlugin extends Plugin {
     conversion.for('upcast').elementToElement({
       view: { name: 'span', classes: ['mergeField'] },
       model: (viewElement, { writer: modelWriter }) => {
-        const name = viewElement.getChild(0)?.data;
-        if (name) return modelWriter.createElement('mergeField', { name });
+		// Seems that older iOS versions (<= 13) don't handle the optional chaining operator (?.) very well.
+		const element = viewElement.getChild(0);
+		if (element) {
+			const name = element.data;
+			if (name) return modelWriter.createElement('mergeField', { name });
+		}
       }
     });
 
