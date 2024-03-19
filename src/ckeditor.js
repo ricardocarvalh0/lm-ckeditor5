@@ -297,7 +297,9 @@ ClassicEditor.defaultConfig = {
     ]
   },
   importWord: {
-    defaultStyles: true,
+    formatting: {
+      defaults: 'inline'
+    }
   },
   list: {
     properties: {
