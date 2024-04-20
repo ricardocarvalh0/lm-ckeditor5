@@ -215,6 +215,7 @@ ClassicEditor.builtinPlugins = [
   Link,
   LinkImage,
   List,
+  // MultiLevelList,
   ListProperties,
   PageBreak,
   Paragraph,
@@ -261,6 +262,7 @@ ClassicEditor.defaultConfig = {
       '|',
       'bulletedList',
       'numberedList',
+      //'multiLevelList', uncomment when we have the license for this
       '|',
       'indent',
       'outdent',
@@ -355,6 +357,35 @@ ClassicEditor.defaultConfig = {
     ]
   },
   fontFamily: {
+    options: [
+      'default',
+      'Arial, Helvetica, sans-serif',
+      'Baskerville, serif',
+      'Bookman Old Style, Bookman, serif',
+      'Cambria, serif',
+      'Caslon, serif',
+      'Century Schoolbook, serif',
+      'Comic Sans MS, cursive, sans-serif',
+      'Consolas, monaco, monospace',
+      'Copperplate, Copperplate Gothic Light, fantasy',
+      'Courier New, Courier, monospace',
+      'Didot, serif',
+      'Garamond, serif',
+      'Geneva, Tahoma, sans-serif',
+      'Georgia, serif',
+      'Gill Sans, Gill Sans MT, sans-serif',
+      'Helvetica Neue, Helvetica, Arial, sans-serif',
+      'Hoefler Text, serif',
+      'Impact, Charcoal, sans-serif',
+      'Lucida Sans Unicode, Lucida Grande, sans-serif',
+      'Palatino, Palatino Linotype, serif',
+      'Rockwell, serif',
+      'Sabon, serif',
+      'Tahoma, Geneva, sans-serif',
+      'Times New Roman, Times, serif',
+      'Trebuchet MS, Helvetica, sans-serif',
+      'Verdana, Geneva, sans-serif'
+    ],
     supportAllValues: true
   },
   fontSize: {
