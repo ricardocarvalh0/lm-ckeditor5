@@ -78,10 +78,12 @@ class ParagraphIndentPlugin extends Plugin {
       { key: 'Backspace', action: 'decrease' }
     ];
 
-    // Register keystroke handlers for indent actions
     keystrokes.forEach(({ key, action }) => {
       editor.keystrokes.set(key, (_, cancel) => {
-        if (this.adjustParagraphIndent(editor, action)) { cancel() }
+        const indentChanged = this.adjustParagraphIndent(editor, action);
+        if (key !== 'Backspace' || indentChanged) {
+          cancel(); // Always cancel for Tab and Shift+Tab, or if Backspace changed the indent
+        }
       }, { priority: 'high' });
     });
 
@@ -98,8 +100,7 @@ class ParagraphIndentPlugin extends Plugin {
     if (position.isAtStart && paragraph) {
       const viewElement = editor.editing.mapper.toViewElement(paragraph);
       const currentIndent = parseInt(viewElement.getStyle('text-indent') || paragraph.getAttribute('textIndent') || '0');
-
-      const change = action === 'increase' ?  ParagraphIndentPlugin.defaultIndentSize : -ParagraphIndentPlugin.defaultIndentSize;
+      const change = action === 'increase' ? ParagraphIndentPlugin.defaultIndentSize : -ParagraphIndentPlugin.defaultIndentSize;
       const newIndentValue = Math.max(currentIndent + change, 0);
 
       if (newIndentValue !== currentIndent) {
