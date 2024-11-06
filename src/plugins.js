@@ -148,9 +148,9 @@ export class IndentParagraph extends Plugin {
 		const selection = editor.model.document.selection;
 		const position = selection.getFirstPosition();
 		const paragraph = position.findAncestor('paragraph');
-		if (position?.isAtStart && paragraph) {
+		if (position && position.isAtStart && paragraph) {
 			const viewElement = editor.editing.mapper.toViewElement(paragraph);
-			let currentIndentStr = viewElement?.getStyle('text-indent') || paragraph.getAttribute('textIndent') || '0';
+			let currentIndentStr = (viewElement && viewElement.getStyle('text-indent')) || paragraph.getAttribute('textIndent') || '0';
 			const currentIndent = parseInt(currentIndentStr, 10);
 			const change = action === 'increase' ? IndentParagraph.defaultIndentSize : -IndentParagraph.defaultIndentSize;
 			const newIndentValue = Math.max(currentIndent + change, 0);
