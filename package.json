@@ -1,7 +1,7 @@
 {
-  "name": "@lawmatics/ckeditor5-build-classic",
-  "version": "41.4.5",
-  "description": "Lawmatics' custom CKeditor5 build",
+  "name": "custom-ckeditor5-ts",
+  "version": "1.0.0",
+  "description": "custom CKeditor5 build with typescript",
   "main": "./build/ckeditor.js",
   "files": [
     "build",
@@ -64,14 +64,17 @@
     "node": ">=14.0.0",
     "npm": ">=5.7.1"
   },
-  "author": "CKSource (http://cksource.com/)",
+  "author": {
+      "name": "Ricardo",
+      "email": "ricardo00123@gmail.com"
+  },
   "license": "GPL-2.0-or-later",
   "homepage": "https://ckeditor.com/ckeditor-5",
-  "bugs": "https://github.com/ckeditor/ckeditor5/issues",
+  "bugs": "https://github.com/ricardocarvalh0/lm-ckeditor5",
   "repository": {
     "type": "git",
-    "url": "https://github.com/boost-legal/lm-ckeditor5",
-    "directory": "packages/lm-ckeditor5"
+    "url": "https://github.com/ricardocarvalh0/lm-ckeditor5",
+    "directory": "lm-ckeditor5"
   },
   "scripts": {
     "build": "webpack --mode production",
